@@ -5,7 +5,7 @@ import { authModalState } from "../../../atoms/authModalAtom";
 import { auth, firestore } from "../../../firebase/clientApp";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { FIREBASE_ERRORS } from "../../../firebase/errors";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, setDoc,doc } from "firebase/firestore";
 import { User } from "firebase/auth";
 
 const SignUp: React.FC = () => {
@@ -31,7 +31,11 @@ const SignUp: React.FC = () => {
   };
 
   const createUserDocument = async (user: User) => {
-    await addDoc(collection(firestore,"users"),JSON.parse(JSON.stringify(user)))
+      const userRef = doc(firestore, "users", user.uid);
+    
+    await setDoc(userRef, JSON.parse(JSON.stringify(user)));
+
+    //await addDoc(collection(firestore,"users"),JSON.parse(JSON.stringify(user)))
   };
 
   useEffect(() => {
