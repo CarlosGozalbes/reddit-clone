@@ -1,7 +1,7 @@
 import { doc, getDoc } from "firebase/firestore";
 import { GetServerSidePropsContext } from "next";
-import React from "react";
-import { Community } from "../../../atoms/communitiesAtom";
+import React, { useEffect } from "react";
+import { Community, communityState } from "../../../atoms/communitiesAtom";
 import { firestore } from "../../../firebase/clientApp";
 import safeJsonStringify from "safe-json-stringify";
 import CommunityNotFound from "../../../components/Community/CommunityNotFound";
@@ -10,6 +10,7 @@ import PageContent from "../../../components/Layout/PageContent";
 import CreateCommunityModal from "../../../components/Modal/CreateCommunity/CreateCommunityModal";
 import CreatePostLink from "../../../components/Community/CreatePostLink";
 import Posts from "../../../components/Posts/Posts";
+import { useSetRecoilState } from "recoil";
 
 interface CommunityPageProps {
   communityData: Community;
@@ -17,9 +18,20 @@ interface CommunityPageProps {
 
 const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
   
+  const setCommunityStateValue = useSetRecoilState(communityState)
+
   if (!communityData.numberOfMembers) {
     return <CommunityNotFound />;
-  }  
+  } 
+  
+  useEffect(() => {
+    setCommunityStateValue(prev =>({
+      ...prev,
+      currentCommunity: communityData
+    }))
+  }, [])
+  
+
   return (
   <>
   <Header communityData={communityData}/>
