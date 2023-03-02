@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import { addDoc, collection, serverTimestamp, Timestamp, updateDoc } from "firebase/firestore";
 import { firestore, storage } from "../../firebase/clientApp";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import useSelectectFile from "../../hooks/useSelectectFile";
 
 type NewPostFormProps = {
   user:User ;
@@ -51,7 +52,8 @@ const NewPostForm: React.FC<NewPostFormProps> = ({user}) => {
     title: '',
     body: '',
   });
-  const [selectedFile, setSelectedFile] = useState<string>();
+ // const [selectedFile, setSelectedFile] = useState<string>();
+ const {selectedFile,setSelectedFile,onSelectFile} = useSelectectFile()
   const [loading,setLoading] =  useState(false)
   const [error,setError] = useState(false)
   const handleCreatePost = async () => {
@@ -93,7 +95,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({user}) => {
     
     
   };
-  const onSelectImage = async (
+ /*  const onSelectImage = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const reader= new FileReader()
@@ -106,7 +108,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({user}) => {
       }
     }
     
-  };
+  }; */
   const onTextChange = async (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -138,7 +140,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({user}) => {
         {selectedTab === "Images & Video" && (
           <ImageUpload
             selectedFile={selectedFile}
-            onSelectImage={onSelectImage}
+            onSelectImage={onSelectFile}
             setSelectedTab={setSelectedTab}
             setSelectedFile={setSelectedFile}
           />

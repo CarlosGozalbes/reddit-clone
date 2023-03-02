@@ -11,6 +11,7 @@ import CreateCommunityModal from "../../../components/Modal/CreateCommunity/Crea
 import CreatePostLink from "../../../components/Community/CreatePostLink";
 import Posts from "../../../components/Posts/Posts";
 import { useSetRecoilState } from "recoil";
+import About from "../../../components/Community/About";
 
 interface CommunityPageProps {
   communityData: Community;
@@ -33,15 +34,18 @@ const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
   
 
   return (
-  <>
-  <Header communityData={communityData}/>
-  <PageContent>
-    <><CreatePostLink/>
-    <Posts communityData={communityData}/>
+    <>
+      <Header communityData={communityData} />
+      <PageContent>
+        <>
+          <CreatePostLink />
+          <Posts communityData={communityData} />
+        </>
+        <>
+          <About communityData={communityData} />
+        </>
+      </PageContent>
     </>
-    <><div>RHS</div></>
-  </PageContent>
-  </>
   );
 };
 
