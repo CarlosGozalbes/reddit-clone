@@ -60,7 +60,7 @@ const TextInputs: React.FC<TextInputsProps> = ({
           padding="0px 30px"
           onClick={handleCreatePost}
           isLoading={loading}
-          disabled={!textInputs.title}
+          isDisabled={!textInputs.title}
         >
           Post
         </Button>
