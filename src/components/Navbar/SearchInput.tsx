@@ -6,10 +6,11 @@ import {
   InputLeftElement,
   InputRightElement,
 } from "@chakra-ui/react";
+import { User } from "firebase/auth";
 import React from "react";
 
 type SearchInputProps = {
-  user?: user | null
+  user?: User | null
 };
 
 const SearchInput: React.FC<SearchInputProps> = ({user}) => {
