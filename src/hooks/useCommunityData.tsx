@@ -50,6 +50,7 @@ const setAuthModalState = useSetRecoilState(authModalState)
       setCommunityStateValue((prev) => ({
         ...prev,
         mySnippets: snippets as CommunitySnippet[],
+        snippetsFetched:true
       }));
     } catch (error: any) {
       console.log("getMySnippets error", error);
@@ -142,7 +143,8 @@ const setAuthModalState = useSetRecoilState(authModalState)
     if (!user) {
       setCommunityStateValue((prev)=>({
         ...prev,
-        mySnippets:[]
+        mySnippets:[],
+        snippetsFetched:false
       }))
       return 
     };
