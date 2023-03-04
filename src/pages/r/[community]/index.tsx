@@ -21,9 +21,6 @@ const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
   
   const setCommunityStateValue = useSetRecoilState(communityState)
 
-  if (!communityData.numberOfMembers) {
-    return <CommunityNotFound />;
-  } 
   
   useEffect(() => {
     setCommunityStateValue(prev =>({
@@ -32,6 +29,9 @@ const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
     }))
   }, [communityData])
   
+  if (!communityData.numberOfMembers) {
+    return <CommunityNotFound />;
+  } 
 
   return (
     <>
