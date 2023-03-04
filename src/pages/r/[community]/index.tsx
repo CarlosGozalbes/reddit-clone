@@ -29,7 +29,7 @@ const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
     }))
   }, [communityData])
   
-  if (!communityData.numberOfMembers) {
+  if (!communityData.createdAt) {
     return <CommunityNotFound />;
   } 
 
